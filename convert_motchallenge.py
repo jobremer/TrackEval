@@ -9,13 +9,12 @@ import ujson
 
 ENCODING = "UTF-8"
 
-dirpath = "convert_tracks/OTCamera/"
-# filename = "Testvideo_Cars-Cyclist_FR20_2020-01-01_00-00-00"
-filename = "OTCamera13_FR20_2023-10-22_17-00-00_Sued"
-fileending = '.ottrk'
-filepath = os.path.join(dirpath, filename) + fileending
+def ottrk_to_mot(filename, key1 = 'data', key2 = 'detections'):
+    print(filename + ' wird konvertiert...')
+    dirpath = "convert_tracks/OTCamera/"
+    fileending = '.ottrk'
+    filepath = os.path.join(dirpath, filename) + fileending
 
-def ottrk_to_txt(filepath, key1 = 'data', key2 = 'detections'):
     # Open ottrk-file
     with bz2.open(filepath, "rt", encoding=ENCODING) as file:
         dictfile = ujson.load(file)
@@ -33,7 +32,7 @@ def ottrk_to_txt(filepath, key1 = 'data', key2 = 'detections'):
 
     # Export
     detections.to_csv(dirpath + filename + '.txt', encoding='utf-8', header=False, index=False)
-
+ 
     # return detections
 
-ottrk_to_txt(filepath = filepath)
+ottrk_to_mot(filename = "OTCamera13_FR20_2023-10-22_17-00-00_Sued")
